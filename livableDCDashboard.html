@@ -1,0 +1,86 @@
+<html>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="./index.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <body>
+        <div class="header" style="margin-top: 2em; margin-left: 5em; margin-right: 5em;">
+          <h1>Livable D.C.</h1>
+          <p>Livable D.C. is a data visualization designed to help people find the best neighborhoods in Washington D.C. to live based on the factors that are most important to them. </p>
+        </div>
+        <div class="container" style="margin-top: 2em;">
+            <div class="row">
+                <div id="tableauViz"></div>
+            </div>
+        </div>
+        <div class="user-guide-container" style="margin: 5em; margin-top: 2em;">
+          <h5>Data Sources</h5>
+          <p>
+            Livable D.C. draws its data from the "Built Environment Indicators and Health - Interactive Map Tool" project.
+            This project uses publicly available data, primarily from Open Data DC, as well as data from the American Community Survey and some data provided by District government agencies.
+            The project team categorized the indicators into nine drivers that encompass various factors related to the built environment.
+            More information about the project can be found on <a href="https://mattgerken.github.io/dc-built-environment-map-tool/#Introduction">the project page</a>,
+            and access to the dataset can be found on <a href="https://catalog.data.gov/dataset/built-environment-indicators">data.gov</a>.
+            A second dataset, found on <a href="https://catalog.data.gov/dataset/dc-health-planning-neighborhoods-to-census-tracts-24ba6">data.gov</a>,
+            was used to map the census tracts from the first dataset to statistical neighborhoods in Washington, D.C. as defined by the DC Department of Health.
+          </p>
+          <p>
+            The nine drivers are:
+          </p>
+          <ul>
+              <li><b>Education</b>: includes proximity to schools, modernized schools, playgrounds, libraries, recreation centers, and access to internet resources</li>
+              <li><b>Employment</b>: focuses solely on travel time to work</li>
+              <li><b>Income</b>: includes proximity to banking institutions and check-cashing places</li>
+              <li><b>Housing</b>: includes housing stock quality, the share of homes built since 1970, the distribution of affordable housing, and proximity to vacant or blighted houses</li>
+              <li><b>Transportation</b>: includes proximity to Metro buses and stations, Capital Bikeshare locations, access to bike lanes, sidewalk quality, and parking availability</li>
+              <li><b>Food Environment</b>: includes proximity to grocery stores, farmers' markets, restaurants, and liquor stores, as well as the prevalence of Low Food Access Areas and the availability of healthy food within stores</li>
+              <li><b>Medical Care</b>: includes proximity to healthcare facilities and mental health providers</li>
+              <li><b>Outdoor Environment</b>: includes tree canopy coverage, proximity to parks and trails, the presence of mixed land uses, the proportion of land use considered "positive" (non-industrial or vacant), and the presence of flood zones</li>
+              <li><b>Community Safety</b>: includes proximity to vacant lots, streetlight coverage, proximity to police and fire stations, and proximity to High Injury Network corridors</li>
+          </ul>
+          <h5>
+            Livability Score Calculation
+          </h5>
+          <p>
+            Livable D.C. calculates a "livability score" for each census tract, which represents how well the area aligns with the user's preferences. This score is determined by weighting each category based on the user's input and combining these weighted scores.
+          </p>
+          <p>
+            Steps to Calculate the Score:
+          </p>
+          <p>
+            <ol>
+              <li>User Input: You can customize the importance of each category using sliders. The total weight assigned across all categories must equal 100%. </li>
+              <li>Percentile Rankings: The dataset assigns each census tract a percentile ranking for each livability category. These rankings, a decimal number ranging from 0 to 1, reflect how the tract compares to others. Higher percentiles indicate more desirable characteristics within that category.</li>
+              <li>Weighted Contributions and Result: To determine each category's weighted contribution to the overall score, the percentile ranking is multiplied by the user-defined weight. Each contribution is then added up to calculate the total livability score for the census tract as a decimal number on the scale of 0 to 1, with higher scores representing more desirable qualities.</li>
+            </ol>
+          </p>
+          <h5>
+            Using the Visualization Tool
+          </h5>
+          <h6>
+            Sliders
+          </h6>
+          <p>
+            You can adjust the sliders to the right of the screen to determine the weight (out of 100%) you want to assign to each category. Use the arrows next to the sliders or directly click on the slider to adjust to the exact numbers you want.
+            An "apply" button below the sliders turns from red to blue when the total weight equals 100%, signifying that your input is valid.
+          </p>
+          <h6>
+            Choropleth Map
+          </h6>
+          <p>
+            The map displays Washington D.C., divided into census tracts. Each tract is shaded with a color representing its livability score, with blue indicating higher scores and orange representing lower scores. By hovering over a census tract, you can view a tooltip box with information about the livability score, census tract number, and neighborhood the tract falls within
+          </p>
+          <h6>
+            Bar Charts
+          </h6>
+          <p>
+            Neighborhood Bar Chart: Located at the bottom of the screen when no specific census tract is selected, this chart displays a bar for each neighborhood in D.C., arranged alphabetically. The height and color of each bar corresponds to the neighborhood's average livability score. Hovering over a neighborhood bar highlights that neighborhood and its census tracts on the map.
+          </p>
+          <p>
+            Census Tract Bar Chart: This chart appears when you select a census tract on the map, providing a more in-depth breakdown of the livability score for the selected tract, showing the percentile ranking for each category.
+          </p>
+        </div>
+    </body>
+    <script type="text/javascript" src="./jquery-3.3.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script type="module" src="./index.js"></script>
+</html>
